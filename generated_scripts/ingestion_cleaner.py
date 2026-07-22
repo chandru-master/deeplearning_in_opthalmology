@@ -1,29 +1,29 @@
 import pandas as pd
-import numpy as np
 
-# Assuming df is the input dataset
-# Inspect the dataset
+# Assuming the initial dataset is available in variable 'df'
+# First, let's print the initial dataset
 print("Initial Dataset:")
-print(df.head())
-print(df.info())
+print(df)
+
+# Perform descriptive analysis
+print("\nDescriptive Analysis:")
 print(df.describe())
+
+# Get unique values counts for each column
+print("\nUnique Values Counts:")
+print(df['id'].value_counts())
+print(df['name'].value_counts())
+print(df['work'].value_counts())
 
 # Drop duplicate rows
 df = df.drop_duplicates()
 
-# Handle missing values
-# Since there's only one missing value in the 'name' column, we'll fill it with a suitable value
+# Fill null values in 'name' column with a suitable value, e.g., 'Unknown'
 df['name'] = df['name'].fillna('Unknown')
 
-# Clean data types
-# The 'id' column is already of type int64, and 'name' and 'work' are of type str
-# No further data type cleaning is required
+# Print the updated dataset
+print("\nUpdated Dataset:")
+print(df)
 
-# Save the final processed dataset back to df
-print("\nProcessed Dataset:")
-print(df.head())
-print(df.info())
-print(df.describe())
-
-# Save the processed dataset to a csv file
-df.to_csv('processed_dataset.csv', index=False)
+# Save the final processed dataset back to variable 'df'
+df = df
