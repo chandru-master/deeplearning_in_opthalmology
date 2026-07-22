@@ -1,31 +1,39 @@
 import pandas as pd
 import numpy as np
 
-# Initial dataset
-df = pd.DataFrame({
-    'id': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    'name': ['cp', 'dn', 'rs', np.nan, 'cp', 'dn', 'rs', np.nan, 'cp', 'dn'],
-    'work': ['ai', 'ds', 'ceo', 'ai', 'ds', 'ceo', 'ai', 'ds', 'ceo', 'ai']
-})
+# Create a DataFrame from the given data
+data = [
+    {'id': 1, 'name': 'cp', 'work': 'ai'},
+    {'id': 2, 'name': 'dn', 'work': 'ds'},
+    {'id': 3, 'name': 'rs', 'work': 'ceo'},
+    {'id': 4, 'name': np.nan, 'work': 'dev'},
+    {'id': 5, 'name': 'js', 'work': 'ai'},
+    {'id': 6, 'name': 'cp', 'work': 'ai'},
+    {'id': 7, 'name': np.nan, 'work': 'ds'},
+    {'id': 8, 'name': 'rs', 'work': 'ceo'},
+    {'id': 9, 'name': 'js', 'work': 'ai'},
+    {'id': 10, 'name': 'dn', 'work': 'ds'}
+]
+df = pd.DataFrame(data)
 
-# Drop duplicate rows
-df = df.drop_duplicates()
+# Print the initial null counts
+print("Initial Null Counts:")
+print(df.isnull().sum())
 
-# Handle missing values
-df['name'] = df['name'].fillna('Unknown')
+# Clean the null values by replacing them with empty strings
+df['name'] = df['name'].fillna('')
 
-# Clean data types
-df['id'] = pd.to_numeric(df['id'], downcast='integer')
-df['name'] = df['name'].astype(str)
-df['work'] = df['work'].astype(str)
+# Print the null counts after cleaning
+print("\nNull Counts After Cleaning:")
+print(df.isnull().sum())
 
-# Descriptive data analysis
-print("Dataset Shape:", df.shape)
-print("Dataset Columns:", df.columns)
-print("Dataset Data Types:\n", df.dtypes)
-print("Dataset Summary Statistics:\n", df.describe())
-print("Dataset Missing Values:\n", df.isnull().sum())
-print("Dataset Unique Values:\n", df.nunique())
+# Print the descriptive analysis
+print("\nDescriptive Analysis:")
+print(df.describe())
 
-# Save the final processed dataset
+# Print the first 3 rows of the cleaned DataFrame
+print("\nFirst 3 Rows of Cleaned DataFrame:")
+print(df.head(3))
+
+# Save the final processed dataset back to the variable df
 df = df
